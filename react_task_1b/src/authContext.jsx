@@ -14,8 +14,11 @@ const reducer = (state, action) => {
   switch (action.type) {
     case "LOGIN":
       //TODO
+      localStorage.setItem("user", JSON.stringify(action.payload));
       return {
         ...state,
+        isAuthenticated: true,
+        user: action.payload,
       };
     case "LOGOUT":
       localStorage.clear();
@@ -43,6 +46,7 @@ export const tokenExpireError = (dispatch, errorMessage) => {
 
 const AuthProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
+  console.log(state);
 
   React.useEffect(() => {
     //TODO

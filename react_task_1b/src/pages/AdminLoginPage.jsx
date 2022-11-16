@@ -29,9 +29,9 @@ const AdminLoginPage = () => {
     let sdk = new MkdSDK();
     //TODO
     try {
-      const {role} = await sdk.login(email, password, "admin");
+      const {role, token} = await sdk.login(email, password, "admin");
       const data = await sdk.check(role);
-      dispatch({type: "LOGIN"});
+      dispatch({type: "LOGIN", payload: {email: email, password: password, role: role, token: token}});
     } catch (error) {
       console.log(error)
     }
