@@ -28,17 +28,18 @@ const AdminLoginPage = () => {
   const onSubmit = async (data) => {
     let sdk = new MkdSDK();
     //TODO
+    dispatch({type: "LOGIN", })
   };
 
   return (
-    <div className="w-full max-w-xs mx-auto">
+    <div className="mx-auto w-full max-w-xs">
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 mt-8 "
+        className="px-8 pt-6 pb-8 mt-8 mb-4 bg-white rounded shadow-md"
       >
         <div className="mb-4">
           <label
-            className="block text-gray-700 text-sm font-bold mb-2"
+            className="block mb-2 text-sm font-bold text-gray-700"
             htmlFor="email"
           >
             Email
@@ -51,12 +52,12 @@ const AdminLoginPage = () => {
               errors.email?.message ? "border-red-500" : ""
             }`}
           />
-          <p className="text-red-500 text-xs italic">{errors.email?.message}</p>
+          <p className="text-xs italic text-red-500">{errors.email?.message}</p>
         </div>
 
         <div className="mb-6">
           <label
-            className="block text-gray-700 text-sm font-bold mb-2"
+            className="block mb-2 text-sm font-bold text-gray-700"
             htmlFor="password"
           >
             Password
@@ -69,14 +70,14 @@ const AdminLoginPage = () => {
               errors.password?.message ? "border-red-500" : ""
             }`}
           />
-          <p className="text-red-500 text-xs italic">
+          <p className="text-xs italic text-red-500">
             {errors.password?.message}
           </p>
         </div>
-        <div className="flex items-center justify-between">
+        <div className="flex justify-between items-center">
           <input
             type="submit"
-            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+            className="px-4 py-2 font-bold text-white bg-blue-500 rounded hover:bg-blue-700 focus:outline-none focus:shadow-outline"
             value="Sign In"
           />
         </div>

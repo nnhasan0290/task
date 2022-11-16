@@ -15,6 +15,14 @@ export default function MkdSDK() {
   
   this.login = async function (email, password, role) {
     //TODO
+    const user = {
+      email: email,
+      password: password,
+      role: role,
+    }
+    this.callRestAPI(user,"GET").then((res) => {
+      return res;
+    })
   };
 
   this.getHeader = function () {
