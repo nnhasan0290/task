@@ -20,9 +20,8 @@ export default function MkdSDK() {
       password: password,
       role: role,
     }
-    this.callRestAPI(user,"GET").then((res) => {
-      return res;
-    })
+    const response = await this.callRestAPI(user, "GET");
+    return response;
   };
 
   this.getHeader = function () {
