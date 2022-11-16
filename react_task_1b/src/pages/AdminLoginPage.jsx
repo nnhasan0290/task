@@ -5,6 +5,8 @@ import * as yup from "yup";
 import MkdSDK from "../utils/MkdSDK";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../authContext";
+import SnackBar from "../components/SnackBar";
+import { GlobalContext } from "../globalContext";
 
 const AdminLoginPage = () => {
   const schema = yup
@@ -15,6 +17,7 @@ const AdminLoginPage = () => {
     .required();
 
   const { dispatch } = React.useContext(AuthContext);
+  const globalContext = React.useContext(GlobalContext);
   const navigate = useNavigate();
   const {
     register,
@@ -30,12 +33,25 @@ const AdminLoginPage = () => {
     //TODO
     try {
       const { role, token } = await sdk.login(email, password, "admin");
-      const data = await sdk.check(role);
-      console.log(email, role, token);
-      dispatch({
-        type: "LOGIN",
-        payload: { email: email, password: password, role: role, token: token },
-      });
+      const isAdmin = await sdk.check(role);
+      if (isAdmin) {
+        dispatch({
+          type: "LOGIN",
+          payload: {
+            email: email,
+            password: password,
+            role: role,
+            token: token,
+          },
+        });
+        globalContext.dispatch({
+          type: "SNACKBAR",
+          payload: { message: "LOGIN successful" },
+        });
+        navigate("/");
+      } else {
+        throw "wrong user or password";
+      }
     } catch (error) {
       console.log(error);
     }
@@ -92,6 +108,7 @@ const AdminLoginPage = () => {
           />
         </div>
       </form>
+      <SnackBar />
     </div>
   );
 };
