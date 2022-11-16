@@ -21,7 +21,6 @@ export default function MkdSDK() {
       role: role,
     };
     const response = await this.callRestAPI(user, "login");
-    localStorage.setItem("token", response.token);
     return response;
   };
 
@@ -64,7 +63,6 @@ export default function MkdSDK() {
         }
         return jsonGet;
 
-
       case "login":
         const getLoginResponse = await fetch(
           this._baseurl + `/v2/api/lambda/${method}`,
@@ -105,9 +103,6 @@ export default function MkdSDK() {
         }
         return checkRes;
 
-
-
-    
       case "PAGINATE":
         if (!payload.page) {
           payload.page = 1;
@@ -140,7 +135,7 @@ export default function MkdSDK() {
 
   this.check = async function (role) {
     //TODO
-    const data = await this.callRestAPI({role: role}, "check");
+    const data = await this.callRestAPI({ role: role }, "check");
     return data.error ? false : true;
   };
 

@@ -6,7 +6,7 @@ import MkdSDK from "../utils/MkdSDK";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../authContext";
 import SnackBar from "../components/SnackBar";
-import { GlobalContext } from "../globalContext";
+import { GlobalContext, showToast } from "../globalContext";
 
 const AdminLoginPage = () => {
   const schema = yup
@@ -44,10 +44,7 @@ const AdminLoginPage = () => {
             token: token,
           },
         });
-        globalContext.dispatch({
-          type: "SNACKBAR",
-          payload: { message: "LOGIN successful" },
-        });
+        showToast(globalContext.dispatch, "LOGIN SUCCESSFUL");
         navigate("/admin/dashboard");
       } else {
         throw "wrong user or password";

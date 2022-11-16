@@ -15,7 +15,6 @@ const reducer = (state, action) => {
     case "LOGIN":
       //TODO
       localStorage.setItem("user", JSON.stringify(action.payload));
-      console.log(JSON.parse(localStorage.getItem("user")));
       const { email, password, token, role } = action.payload;
       return {
         ...state,
