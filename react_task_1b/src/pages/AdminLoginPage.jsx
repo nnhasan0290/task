@@ -25,10 +25,17 @@ const AdminLoginPage = () => {
     resolver: yupResolver(schema),
   });
 
-  const onSubmit = async (data) => {
+  const onSubmit = async ({email, password}) => {
     let sdk = new MkdSDK();
     //TODO
-    dispatch({type: "LOGIN", })
+    try {
+      const {role} = await sdk.login(email, password, "admin");
+      const data = await sdk.check(role);
+      dispatch({type: "LOGIN"});
+    } catch (error) {
+      console.log(error)
+    }
+    
   };
 
   return (
