@@ -15,6 +15,7 @@ const reducer = (state, action) => {
     case "LOGIN":
       //TODO
       localStorage.setItem("user", JSON.stringify(action.payload));
+      console.log(JSON.parse(localStorage.getItem("user")));
       const { email, password, token, role } = action.payload;
       return {
         ...state,
@@ -38,10 +39,11 @@ const reducer = (state, action) => {
 let sdk = new MkdSDK();
 
 export const tokenExpireError = (dispatch, errorMessage) => {
-  const role = localStorage.getItem("role");
+  const user = JSON.parse(localStorage.getItem("user"));
+  const role = user.role;
   if (errorMessage === "TOKEN_EXPIRED") {
     dispatch({
-      type: "Logout",
+      type: "LOGOUT",
     });
     window.location.href = "/" + role + "/login";
   }

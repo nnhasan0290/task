@@ -48,7 +48,7 @@ const AdminLoginPage = () => {
           type: "SNACKBAR",
           payload: { message: "LOGIN successful" },
         });
-        navigate("/");
+        navigate("/admin/dashboard");
       } else {
         throw "wrong user or password";
       }
